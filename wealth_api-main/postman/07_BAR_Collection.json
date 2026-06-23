@@ -1,0 +1,75 @@
+{
+    "info":  {
+                 "name":  "WealthWise 07 - Banking Analytics and Reporting",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+                 "description":  "Updated WealthWise API collection generated for the hardened Spring Boot project."
+             },
+    "item":  [
+                 {
+                     "name":  "Auth",
+                     "item":  [
+                                  [
+                                      {
+                                          "name":  "Login - Operations",
+                                          "request":  {
+                                                          "method":  "POST",
+                                                          "header":  [
+                                                                         {
+                                                                             "key":  "Content-Type",
+                                                                             "value":  "application/json"
+                                                                         }
+                                                                     ],
+                                                          "url":  "{{baseUrl}}/api/auth/login",
+                                                          "body":  {
+                                                                       "raw":  "{\r\n    \"password\":  \"ops123\",\r\n    \"email\":  \"ops@bank.com\"\r\n}",
+                                                                       "mode":  "raw"
+                                                                   }
+                                                      },
+                                          "event":  [
+                                                        {
+                                                            "script":  {
+                                                                           "exec":  [
+                                                                                        "const r = pm.response.json(); pm.collectionVariables.set(\u0027opsToken\u0027, r.token);"
+                                                                                    ],
+                                                                           "type":  "text/javascript"
+                                                                       },
+                                                            "listen":  "test"
+                                                        }
+                                                    ]
+                                      }
+                                  ],
+                                  "Folder"
+                              ]
+                 }
+             ],
+    "variable":  [
+                     {
+                         "key":  "baseUrl",
+                         "value":  "http://localhost:8098"
+                     },
+                     {
+                         "key":  "adminToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "holderToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "opsToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "loanToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "rmToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "complianceToken",
+                         "value":  ""
+                     }
+                 ]
+}

@@ -1,4 +1,4 @@
-# WealthWise — Banking & Wealth Management Platform
+# WealthWise Ã¢â‚¬â€ Banking & Wealth Management Platform
 
 Spring Boot REST backend covering all 8 modules from the spec, with JWT-secured,
 role-based access. Built with the same layered pattern throughout:
@@ -11,7 +11,7 @@ controller  ->  service (interface)  ->  serviceimplementation  ->  repository  
 ## Tech stack
 - Java 21, Spring Boot 3.3.4 (Web, Data JPA, Security, Validation)
 - MySQL (auto-creates the `wealthwise_banking` schema on first run)
-- JWT auth (jjwt 0.9.1) — `JwtUtil` / `JwtFilter` / `SecurityConfig`
+- JWT auth (jjwt 0.9.1) Ã¢â‚¬â€ `JwtUtil` / `JwtFilter` / `SecurityConfig`
 - Lombok for getters/setters/constructors
 
 ## Modules & entities
@@ -30,8 +30,8 @@ Most module controllers expose the same CRUD endpoints:
 `POST /create`, `GET /all`, `GET /get/{id}`, `PUT /update/{id}`, `DELETE /delete/{id}`
 (the User module keeps your original method names: `/alluser`, etc.).
 
-> **Fund Transfers & Payments (4.3) is different** — it follows the FTP sprint
-> stories, not the generic CRUD shape. Endpoints (see `FTP_Collection.json`):
+> **Fund Transfers & Payments (4.3) is different** Ã¢â‚¬â€ it follows the FTP sprint
+> stories, not the generic CRUD shape. Endpoints (see `postman/03_FTP_Collection.json`):
 > `POST /api/fund-transfers`, `GET /api/fund-transfers?fromAccountId=` / `?toAccountId=`,
 > `GET /api/fund-transfers/{id}`, `PATCH /api/fund-transfers/{id}/reverse`,
 > `GET /api/fund-transfers/account/{id}/statement?from=&to=`;
@@ -41,7 +41,7 @@ Most module controllers expose the same CRUD endpoints:
 > `PATCH /api/scheduled-payments/{id}/pause`, `PATCH /api/scheduled-payments/{id}/cancel`.
 
 > **Loan & Credit Management (4.4) is also story-shaped**, not generic CRUD
-> (see `LCM_Collection.json`). Lifecycle: submit → under-review → approve → disburse → pay EMIs.
+> (see `postman/04_LCM_Collection.json`). Lifecycle: submit Ã¢â€ â€™ under-review Ã¢â€ â€™ approve Ã¢â€ â€™ disburse Ã¢â€ â€™ pay EMIs.
 > `POST /api/loan-applications`, `GET /api/loan-applications?customerId=` / `?status=`,
 > `GET /api/loan-applications/{id}`, `PATCH /api/loan-applications/{id}/under-review` / `/approve` / `/reject`;
 > `POST /api/loan-accounts/disburse?applicationId=` (400 if not APPROVED or already disbursed),
@@ -51,7 +51,7 @@ Most module controllers expose the same CRUD endpoints:
 > `PATCH /api/emi-schedules/{id}/pay` (400 if already PAID),
 > `GET /api/emi-schedules/loan-account/{id}/summary`.
 
-> **IAM (4.1) & Notifications (4.8) are story-shaped** (see `IAM_NAL_Collection.json`).
+> **IAM (4.1) & Notifications (4.8) are story-shaped** (see `postman/01_IAM_Collection.json` and `postman/08_NAL_Collection.json`).
 > Passwords are **BCrypt-hashed**; login returns `{token, role, userId}`.
 > `POST /api/auth/login`; `POST/GET /api/users`, `GET /api/users/{id}`,
 > `PATCH /api/users/{id}/status?status=` / `/lock` / `/unlock` (ADMIN);
@@ -59,7 +59,7 @@ Most module controllers expose the same CRUD endpoints:
 > `POST /api/notifications`, `GET /api/notifications/user/{userId}` / `/unread` / `/count`,
 > `PATCH /api/notifications/{id}/read`, `PATCH /api/notifications/user/{userId}/read-all`.
 
-> **Customer Accounts (4.2) & KYC/Compliance (4.6) are story-shaped** (see `CAM_KYC_Collection.json`).
+> **Customer Accounts (4.2) & KYC/Compliance (4.6) are story-shaped** (see `postman/02_CAM_Collection.json` and `postman/06_KYC_Compliance_Collection.json`).
 > `POST /api/bank-accounts`, `GET /api/bank-accounts?customerId=`, `GET /api/bank-accounts/{id}`,
 > `GET /api/bank-accounts/number/{accountNumber}`, `PATCH /api/bank-accounts/{id}/close`;
 > `POST /api/account-statements?accountId=&from=&to=`, `GET /api/account-statements?accountId=`;
@@ -68,7 +68,7 @@ Most module controllers expose the same CRUD endpoints:
 > `POST /api/aml-flags`, `GET /api/aml-flags?accountId=` / `?status=`,
 > `PATCH /api/aml-flags/{id}/investigate` / `/clear`.
 
-> **Investment & Portfolio (4.5) & Banking Analytics (4.7) are story-shaped** (see `IPM_BAR_Collection.json`).
+> **Investment & Portfolio (4.5) & Banking Analytics (4.7) are story-shaped** (see `postman/05_IPM_Collection.json` and `postman/07_BAR_Collection.json`).
 > Holdings are **nested under portfolios** (no standalone `/holdings`). `BankingReport.scope` is free-text `String`
 > with JSON `metrics`.
 > `POST /api/fixed-deposits`, `GET /api/fixed-deposits?customerId=` / `{id}`, `PATCH /api/fixed-deposits/{id}/mature` / `/close-premature`, `GET /api/fixed-deposits/maturing?before=`;
@@ -78,7 +78,7 @@ Most module controllers expose the same CRUD endpoints:
 
 ## Roles (RBAC)
 `ACCOUNTHOLDER`, `RELATIONSHIPMANAGER`, `LOANOFFICER`, `OPERATIONS`, `COMPLIANCE`, `ADMIN`
-— enforced per module in `SecurityConfig`. CORS is open to `http://localhost:3000`.
+Ã¢â‚¬â€ enforced per module in `SecurityConfig`. CORS is open to `http://localhost:3000`.
 
 ## Run it (quick)
 1. Start MySQL locally. Update credentials in `src/main/resources/application.properties`
@@ -88,7 +88,7 @@ Most module controllers expose the same CRUD endpoints:
    mvn spring-boot:run
    ```
    The app starts on **http://localhost:8098** (set by `server.port` in
-   `application.properties`). In Spring Tool Suite: *Run As → Spring Boot App* on
+   `application.properties`). In Spring Tool Suite: *Run As Ã¢â€ â€™ Spring Boot App* on
    `WealthWiseApplication`.
 
 > Maven on the corporate network: the SSL-bypass flags live in `.mvn/maven.config`,
@@ -102,7 +102,7 @@ These are the exact steps to get the project building and running on a clean
 machine. Commands are PowerShell.
 
 ### 1. Prerequisites
-- **JDK 21** — verify: `java -version` (should say 21). Note the install path,
+- **JDK 21** Ã¢â‚¬â€ verify: `java -version` (should say 21). Note the install path,
   e.g. `C:\Program Files\Java\jdk-21`.
 - **MySQL 8** running locally on port 3306, user `root` / password `root`
   (or edit `src/main/resources/application.properties` to match yours).
@@ -111,12 +111,12 @@ machine. Commands are PowerShell.
 ### 2. Install Maven (no admin needed)
 Pick one:
 
-**Option A — winget**
+**Option A Ã¢â‚¬â€ winget**
 ```powershell
 winget install Apache.Maven
 ```
 
-**Option B — manual download (what we used)**
+**Option B Ã¢â‚¬â€ manual download (what we used)**
 ```powershell
 $tools = "$env:USERPROFILE\tools"; New-Item -ItemType Directory -Force $tools | Out-Null
 # check current version at https://dlcdn.apache.org/maven/maven-3/ , then:
@@ -131,14 +131,14 @@ $env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 $env:Path = "$env:USERPROFILE\tools\apache-maven-3.9.16\bin;$env:Path"
 mvn -v          # should print Maven 3.9.x + Java 21
 ```
-(To make `JAVA_HOME` / `Path` permanent, add them via *System → Environment Variables*.)
+(To make `JAVA_HOME` / `Path` permanent, add them via *System Ã¢â€ â€™ Environment Variables*.)
 
 ### 3. Run the unit tests
 ```powershell
 cd <project-root-with-pom.xml>
 mvn test
 ```
-Expected: `Tests run: 41, Failures: 0, Errors: 0` → `BUILD SUCCESS`
+Expected: `Tests run: 41, Failures: 0, Errors: 0` Ã¢â€ â€™ `BUILD SUCCESS`
 (7 Fund-Transfers + 7 Loan + 9 IAM/Notifications + 10 Account/KYC/AML + 8 Investment/Analytics tests; Maven downloads test deps on first run).
 
 ### 4. Run the app
@@ -153,13 +153,13 @@ so old rows can break new code (`Data truncated for column 'status'`). Reset onc
 ```powershell
 & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -uroot -proot -e "DROP DATABASE IF EXISTS wealthwise_banking;"
 ```
-Then start the app again — it recreates and re-seeds the schema cleanly.
+Then start the app again Ã¢â‚¬â€ it recreates and re-seeds the schema cleanly.
 
 ### 6. IDE note (Lombok)
 The Fund-Transfers entities use Lombok (`@Data` / `@Builder` / `@Slf4j`).
 - **Maven CLI**: works out of the box (Lombok is an annotation processor on the build path).
 - **Eclipse / Spring Tool Suite**: install the Lombok agent once so the editor
-  resolves generated getters/setters — run `java -jar <path-to-lombok.jar>` (the jar
+  resolves generated getters/setters Ã¢â‚¬â€ run `java -jar <path-to-lombok.jar>` (the jar
   is in `~/.m2/repository/org/projectlombok/lombok/...`) and restart STS. Without
   this the IDE shows false red errors, but `mvn` still compiles fine.
 
@@ -173,7 +173,7 @@ Invoke-RestMethod "$base/api/beneficiaries?customerId=101" -Headers $h          
 Invoke-RestMethod "$base/api/fund-transfers" -Headers $h -Method Post -ContentType "application/json" `
   -Body (@{fromAccountId=1;toAccountId=2;amount=1500;transferType="Internal"} | ConvertTo-Json)   # -> Completed
 ```
-Postman collections live at the project root: `IAM_NAL_Collection.json`, `FTP_Collection.json`, `LCM_Collection.json`.
+Postman collections live in `postman/`, split module-wise from `01_IAM_Collection.json` through `08_NAL_Collection.json`.
 
 ## Auth flow (example)
 1. **Login** to get a JWT (seeded users, e.g. `admin@bank.com` / `admin123`):
@@ -186,7 +186,7 @@ Postman collections live at the project root: `IAM_NAL_Collection.json`, `FTP_Co
    ```
    Authorization: Bearer <token>
    ```
-3. **Create users** (ADMIN only — registration is no longer public). Passwords are BCrypt-hashed:
+3. **Create users** (ADMIN only Ã¢â‚¬â€ registration is no longer public). Passwords are BCrypt-hashed:
    ```
    POST /api/users        (Authorization: Bearer <admin-token>)
    { "name":"Asha", "email":"asha@bank.com", "password":"pass123",
